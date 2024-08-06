@@ -1,30 +1,20 @@
-# React + TypeScript + Vite
+# NCBI Protein Sequence Viewer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Esta aplicación permite obtener secuencias de proteínas aleatorias desde la API de NCBI y mostrarlas en una interfaz simple. Está construida con React, Axios y Bootstrap.
 
-Currently, two official plugins are available:
+## Características
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Obtención de secuencias de proteínas desde la API de NCBI.
+- Cambiar entre diferentes secuencias aleatorias de proteínas.
+- Interfaz sencilla y fácil de usar.
 
-## Expanding the ESLint configuration
+## Captura de Pantalla
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+![Captura de Pantalla](./path/to/screenshot.png)
 
-- Configure the top-level `parserOptions` property like this:
+## Tecnologías Utilizadas
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- **React**: Librería de JavaScript para construir interfaces de usuario.
+- **Axios**: Cliente HTTP para realizar solicitudes a la API.
+- **Bootstrap**: Framework CSS para el diseño de la interfaz.
+- **Vite**:
