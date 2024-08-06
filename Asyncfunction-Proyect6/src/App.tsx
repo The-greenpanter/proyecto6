@@ -1,56 +1,71 @@
-import React, { useState, useEffect } from 'react'; // Importa React y hooks para manejar estado y efectos secundarios
-import axios from 'axios'; // Importa Axios para hacer peticiones HTTP
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "./App.css";
 
-const NCBI_URL = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi'; // URL de la API de NCBI para obtener secuencias de proteínas
-const PDB_URL = 'https://data.rcsb.org/rest/v1/core/entry/'; // URL base de la API de RCSB PDB
+const NCBI_URL = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi';
+
+// Lista de IDs de proteínas de ejemplo
+const proteinIds = ['NP_000546', 'NP_001276', 'NP_002006', 'NP_002422'];
 
 const App = () => {
-  const [sequence, setSequence] = useState(''); // Estado para almacenar la secuencia de la proteína
-  const [structureUrl, setStructureUrl] = useState(''); // Estado para almacenar la URL de la estructura 3D
-  const [error, setError] = useState(null); // Estado para manejar errores
+  const [sequence, setSequence] = useState('');
+  const [error, setError] = useState(null);
+  const [currentProteinId, setCurrentProteinId] = useState(proteinIds[0]);
 
+  // Función para obtener una secuencia de proteína por ID
+  const fetchSequence = async (proteinId) => {
+    try {
+      const response = await axios.get(NCBI_URL, {
+        params: {
+          db: 'protein',
+          id: proteinId,
+          rettype: 'fasta',
+          retmode: 'text',
+        },
+      });
+      setSequence(response.data);
+    } catch (error) {
+      setError(error);
+    }
+  };
+
+  // Efecto para cargar la secuencia inicial al montar el componente
   useEffect(() => {
-    const fetchSequenceAndStructure = async () => {
-      const proteinId = 'NP_000546'; // ID de ejemplo para la proteína
-      const pdbId = '4HHB'; // ID de ejemplo para PDB
+    fetchSequence(currentProteinId);
+  }, [currentProteinId]);
 
-      try {
-        // Obtener la secuencia de la proteína desde NCBI
-        const response = await axios.get(NCBI_URL, {
-          params: {
-            db: 'protein',
-            id: proteinId,
-            rettype: 'fasta',
-            retmode: 'text',
-          },
-        });
-        setSequence(response.data); // Actualiza el estado con la secuencia obtenida
+  // Función para obtener un nuevo ID de proteína aleatorio
+  const getRandomProteinId = () => {
+    const randomIndex = Math.floor(Math.random() * proteinIds.length);
+    return proteinIds[randomIndex];
+  };
 
-        // Obtener la estructura 3D desde RCSB PDB
-        const structureResponse = await axios.get(`${PDB_URL}${pdbId}`);
-        setStructureUrl(`https://files.rcsb.org/download/${pdbId}.pdb`); // Actualiza el estado con la URL de la estructura 3D
-      } catch (error) {
-        setError(error); // Maneja errores actualizando el estado de error
-      }
-    };
+  // Maneja el click del botón para obtener una nueva secuencia aleatoria
+  const handleNewSequence = () => {
+    const newProteinId = getRandomProteinId();
+    setCurrentProteinId(newProteinId);
+  };
 
-    fetchSequenceAndStructure(); // Llama a la función para obtener los datos al montar el componente
-  }, []);
-
-  if (error) return <p>Error: {error.message}</p>; // Muestra un mensaje de error si ocurre un error
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div>
-      <h1>NCBI Protein Sequence and 3D Structure</h1>
-      <pre>{sequence}</pre> {/* Muestra la secuencia de la proteína */}
-      {structureUrl && (
-        <div>
-          <h2>3D Structure</h2>
-          <iframe src={`http://www.rcsb.org/structure/${structureUrl}`} width="600" height="400"></iframe> {/* Muestra la estructura 3D */}
+    <div className='container '>
+      <div className="row justify-content-center">
+          <h1 className='align-self-center mx-0 py-3 fs-1 text-center'>NCBI Protein Sequence</h1>
+            <button className="btn my-3 text-center" onClick={handleNewSequence}>
+              Get New Random Sequence
+            </button>
+        <div className="col-12 align-self-center cont ">
+          <div className="text-center boton">
+          </div>
+          <div className="seq text-center">
+            <pre className='content my-3 fs-5 text-justify'>{sequence}</pre>
+          </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };
 
-export default App; // Exporta el componente para su uso en otros lugares
+export default App;

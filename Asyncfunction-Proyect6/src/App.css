@@ -1,42 +1,52 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* @pc: #F2594B;
+@SC: #D2D904;
+@TC: #04D939;
+@FC: #05C7F2;
+@LC: #05AFF2; */
+
+/* Color Theme Swatches in Hex */
+.Colliding-Power-1-hex { color: #363432; }
+.Colliding-Power-2-hex { color: #196774; }
+.Colliding-Power-3-hex { color: #90A19D; }
+.Colliding-Power-4-hex { color: #F0941F; }
+.Colliding-Power-5-hex { color: #EF6024; }
+
+/* Color Theme Swatches in RGBA */
+.Colliding-Power-1-rgba { color: rgba(54, 52, 50, 1); }
+.Colliding-Power-2-rgba { color: rgba(25, 103, 116, 1); }
+.Colliding-Power-3-rgba { color: rgba(144, 161, 157, 1); }
+.Colliding-Power-4-rgba { color: rgba(240, 148, 31, 1); }
+.Colliding-Power-5-rgba { color: rgba(239, 96, 36, 1); }
+
+/* Color Theme Swatches in HSLA */
+.Colliding-Power-1-hsla { color: hsla(30, 3, 20, 1); }
+.Colliding-Power-2-hsla { color: hsla(188, 64, 27, 1); }
+.Colliding-Power-3-hsla { color: hsla(165, 8, 59, 1); }
+.Colliding-Power-4-hsla { color: hsla(33, 87, 53, 1); }
+.Colliding-Power-5-hsla { color: hsla(17, 86, 53, 1); }
+
+*{
+  background-color: #363432;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+h1 {
+  color: #EF6024;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btn {
+  background-color: #05C7F2;
+  color: #363432;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.btn:hover {
+  background-color: #196774;
+  color:#F2F2F2;
 }
-
-.card {
-  padding: 2em;
+.cont,
+.boton,
+.content {
+  background-color: #363432;
 }
-
-.read-the-docs {
-  color: #888;
+.seq{
+  color: #F2F2F2;
 }
